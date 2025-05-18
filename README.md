@@ -42,7 +42,7 @@ an implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for gr
      nmf:    <silhouette_score>
      kmeans: <silhouette_score>
      ```  
-   - Silhouette score ∈ [–1, 1]: higher = tighter, more separated clusters
+   - Silhouette score ∈ [–1, 1]
 
 ---
 
