@@ -1,6 +1,6 @@
 # Symmetric NMF Clustering
 
-an implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for graph-based clustering, a comparison to K-means, and tools to build and run both the C and Python interfaces
+Implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for graph-based clustering, a comparison to K-means, and tools to build and run both the C and Python interfaces.
 
 ---
 
