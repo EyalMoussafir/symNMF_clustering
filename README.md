@@ -48,7 +48,7 @@ Implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for graph
 
 ## Output Format & Interpretation
 
-All routines write to **stdout** as a comma-separated matrix, rows on separate lines, values to 4 decimal places (e.g. `0.1234`):
+All routines write to **stdout** as a comma-separated matrix, rows on separate lines:
 
 - **sym**   → similarity matrix A
 - **ddg**   → degree matrix D
