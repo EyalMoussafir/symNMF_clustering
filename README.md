@@ -1,6 +1,6 @@
 # Symmetric NMF Clustering
 
-an implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for graph-based clustering, a comparison to K-means, and tools to build and run both the C and Python interfaces.
+an implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for graph-based clustering, a comparison to K-means, and tools to build and run both the C and Python interfaces
 
 ---
 
@@ -16,28 +16,42 @@ an implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for gr
 
 ---
 
-# build & run
+## Build & Run
 
-1. **Input Format**  
-   - The program reads a `.txt` file containing N data points in ℝᵈ, one point per line (coordinates separated by commas or whitespace).
+1. **C Executable**
+   - Build: `make`
+   - Run: `./symnmf <goal> <input_file>`
+     - `<goal>` ∈ {sym, ddg, norm}
+       - sym  — compute similarity matrix A
+       - ddg  — compute degree matrix D
+       - norm — compute normalized similarity W = D⁻¹ᐟ² A D⁻¹ᐟ²
+     - `<input_file>` — path to your `.txt` data file containing N data points in ℝᵈ, one point per line (coordinates separated by commas or whitespace)
 
-2. **C Executable**  
-   - **Using make**  
-     - `make`  
-     - `./symnmf <goal> <input_file>`  
-   - **Without make**  
-     - `gcc -fPIC -shared -o symnmf symnmf.c symnmfmodule.c $(python3-config --cflags --ldflags)`  
-     - `./symnmf <goal> <input_file>`
+2. **Python Interface**
+   - Build extension: `python3 setup.py build_ext --inplace`
+   - Run: `python3 symnmf.py <k> <goal> <input_file>`
+     - `<k>` — number of clusters
+     - `<goal>` ∈ {sym, ddg, norm, symnmf}
+       - symnmf — runs full factorization and outputs H ∈ ℝ^{N×k}
+     - `<input_file>` — path to your `.txt` data file
 
-3. **Python Interface**  
-   - **Build the extension**  
-     - `python3 setup.py build_ext --inplace`  
-   - **Run**  
-     - `python3 symnmf.py <k> <goal> <input_file>`
+3. **Analysis Script**  
+   - Run: `python3 analysis.py <k> <input_file>`
+   - Prints:
+     ```
+     nmf:    <silhouette_score>
+     kmeans: <silhouette_score>
+     ```  
+   - Silhouette score ∈ [–1, 1]: higher = tighter, more separated clusters
 
-4. **Output Format**  
-   - Writes a matrix to stdout:  
-     - One row per line  
-     - Entries separated by commas  
-     - Values formatted to 4 decimal places (e.g. `0.1234`)
+---
 
+## Output Format & Interpretation
+
+All routines write to **stdout** as a comma-separated matrix, rows on separate lines, values to 4 decimal places (e.g. `0.1234`):
+
+- **sym**   → similarity matrix A
+- **ddg**   → degree matrix D
+- **norm**  → normalized similarity W = D⁻¹ᐟ² A D⁻¹ᐟ²
+- **symnmf**→ factor H, each row’s max entry indicates cluster assignment
+- **analysis.py**→ silhouette scores for SymNMF vs. K-means
