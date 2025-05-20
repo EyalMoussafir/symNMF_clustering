@@ -11,8 +11,7 @@ Implementation of Symmetric Non-negative Matrix Factorization (SymNMF) for graph
 - **kmeans.py**          — Python K-means for comparison
 - **analysis.py**        — Driver script: runs SymNMF vs. K-means & prints silhouette scores
 - **setup.py**           — setuptools script to build the Python extension in-place
-- **Makefile**           — rules to compile the symnmf C executable
-- **README.md**          
+- **Makefile**           — rules to compile the symnmf C executable         
 
 ---
 
